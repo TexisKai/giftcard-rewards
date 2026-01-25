@@ -62,7 +62,7 @@ export default function OfferLinks() {
                 <button
                     key={index}
                     onClick={() => handleOfferClick(offer)}
-                    className="w-full bg-white/70 backdrop-blur-sm rounded-2xl p-3 md:p-4 flex items-center gap-4 
+                    className="w-full bg-white/70 backdrop-blur-sm rounded-3xl p-3 md:p-4 flex items-center gap-4 
                      hover:bg-white/90 hover:scale-[1.02] hover:shadow-xl
                      active:scale-[0.98]
                      transition-all duration-200 ease-out

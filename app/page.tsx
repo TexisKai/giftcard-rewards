@@ -7,7 +7,6 @@ import Header from '@/components/Header';
 import OfferLinks from '@/components/OfferLinks';
 import HowToSection from '@/components/HowToSection';
 import TestimonialsCarousel from '@/components/TestimonialsCarousel';
-import GiftCardGrid from '@/components/GiftCardGrid';
 
 export default function Home() {
   const [userEmail, setUserEmail] = useState('');
@@ -18,38 +17,43 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-[#FFE1E8] to-[#FFC9D9] pb-20">
+    <main className="min-h-screen bg-[#FDF2F5] py-8 md:py-12 flex items-center justify-center">
       <EmailPopup onEmailSubmit={handleEmailSubmit} />
 
-      <div className="max-w-lg mx-auto px-5 py-6">
-        {/* Top Navigation - clean text links with icons */}
-        <div className="flex justify-between items-center mb-8">
-          <button className="inline-flex items-center gap-2 text-sm font-medium text-gray-800 hover:text-black hover:bg-white/40 px-3 py-1.5 rounded-full transition-all duration-200">
-            <Bell className="w-4 h-4" />
-            <span>Subscribe</span>
-          </button>
-          <button className="inline-flex items-center justify-center w-8 h-8 text-gray-800 hover:text-black hover:bg-white/40 rounded-full transition-all duration-200">
-            <Share className="w-4 h-4" />
-          </button>
-        </div>
+      {/* Main Beacons-style Container */}
+      <div className="w-full max-w-[440px] bg-transparent mx-auto relative">
+        {/* Glow/Border Effect Container */}
+        <div className="bg-[#FFE1E8] rounded-[40px] border-[8px] border-[#E8F0FE] shadow-[0_0_20px_rgba(232,240,254,0.6)] overflow-hidden min-h-[800px] p-5 md:p-6 relative">
 
-        <Header />
-        <OfferLinks />
-        <HowToSection />
-        <GiftCardGrid />
-        <TestimonialsCarousel />
+          {/* Top Navigation - clean text links with icons */}
+          <div className="flex justify-between items-center mb-8 px-2">
+            <button className="inline-flex items-center gap-2 text-sm font-bold text-gray-900 hover:opacity-70 transition-opacity">
+              <Bell className="w-5 h-5" />
+              <span style={{ fontFamily: 'var(--font-arbutus)' }}>Subscribe</span>
+            </button>
+            <button className="inline-flex items-center justify-center w-8 h-8 text-gray-900 hover:opacity-70 transition-opacity">
+              <Share className="w-5 h-5" />
+            </button>
+          </div>
 
-        {/* Footer - cleaner styling */}
-        <div className="text-center mt-10">
-          <a
-            href="https://beacons.ai/signup"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-xs text-gray-500 hover:text-gray-700 transition-colors"
-          >
-            <span>Powered by</span>
-            <span className="font-semibold">Beacons</span>
-          </a>
+          <Header />
+          <OfferLinks />
+          <HowToSection />
+          <TestimonialsCarousel />
+
+          {/* Footer */}
+          <div className="text-center mt-12 pb-4">
+            <a
+              href="https://beacons.ai/signup"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-xs text-gray-500 hover:text-gray-800 transition-colors"
+            >
+              <div className="w-4 h-4 bg-black rounded-full text-white flex items-center justify-center font-bold text-[8px]">b</div>
+              <span className="font-semibold">Beacons</span>
+            </a>
+          </div>
+
         </div>
       </div>
     </main>
