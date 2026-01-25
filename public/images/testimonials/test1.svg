@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 533" width="400" height="533">
+  <defs>
+    <linearGradient id="bg1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a1a"/>
+      <stop offset="100%" style="stop-color:#262626"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="533" fill="url(#bg1)"/>
+  
+  <!-- Instagram DM style header -->
+  <rect x="20" y="20" width="360" height="60" rx="15" fill="#333333"/>
+  <circle cx="55" cy="50" r="22" fill="#4CAF50"/>
+  <text x="55" y="55" font-family="Arial" font-size="12" fill="white" text-anchor="middle">✓</text>
+  <text x="90" y="45" font-family="Arial" font-size="14" fill="white" font-weight="bold">Sarah M.</text>
+  <text x="90" y="62" font-family="Arial" font-size="11" fill="#888888">Active now</text>
+  
+  <!-- Message bubbles -->
+  <rect x="30" y="120" width="280" height="80" rx="20" fill="#3B82F6"/>
+  <text x="45" y="150" font-family="Arial" font-size="14" fill="white">OMG I just received my Amazon</text>
+  <text x="45" y="170" font-family="Arial" font-size="14" fill="white">gift card!! 🎉🎁 $750 is REAL!</text>
+  
+  <rect x="90" y="220" width="280" height="60" rx="20" fill="#444444"/>
+  <text x="105" y="250" font-family="Arial" font-size="14" fill="white">That's amazing! How long did it take?</text>
+  
+  <rect x="30" y="300" width="300" height="80" rx="20" fill="#3B82F6"/>
+  <text x="45" y="330" font-family="Arial" font-size="14" fill="white">About 3 days after completing</text>
+  <text x="45" y="350" font-family="Arial" font-size="14" fill="white">the deals. Totally worth it! 💯</text>
+  
+  <!-- Gift card image placeholder -->
+  <rect x="30" y="400" width="180" height="100" rx="10" fill="#FF9900"/>
+  <text x="120" y="440" font-family="Arial" font-size="16" fill="white" text-anchor="middle" font-weight="bold">amazon</text>
+  <text x="120" y="470" font-family="Arial" font-size="24" fill="white" text-anchor="middle" font-weight="bold">$750</text>
+</svg>
