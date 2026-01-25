@@ -1,11 +1,13 @@
 'use client';
 
 import { useState } from 'react';
+import { Bell, Share } from 'lucide-react';
 import EmailPopup from '@/components/EmailPopup';
 import Header from '@/components/Header';
 import OfferLinks from '@/components/OfferLinks';
 import HowToSection from '@/components/HowToSection';
 import TestimonialsCarousel from '@/components/TestimonialsCarousel';
+import GiftCardGrid from '@/components/GiftCardGrid';
 
 export default function Home() {
   const [userEmail, setUserEmail] = useState('');
@@ -16,26 +18,25 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-[#FFE1E8] to-[#FFC9D9] pb-16">
+    <main className="min-h-screen bg-gradient-to-b from-[#FFE1E8] to-[#FFC9D9] pb-20">
       <EmailPopup onEmailSubmit={handleEmailSubmit} />
 
-      <div className="max-w-lg mx-auto px-4 py-5">
-        {/* Top Navigation - lightweight link-style buttons */}
-        <div className="flex justify-between items-center mb-5">
-          <button className="inline-flex items-center gap-1 text-sm text-gray-600 hover:text-gray-900 transition-colors">
-            <span>🔔</span>
-            <span className="underline-offset-2 hover:underline">
-              Subscribe
-            </span>
+      <div className="max-w-lg mx-auto px-5 py-6">
+        {/* Top Navigation - clean text links with icons */}
+        <div className="flex justify-between items-center mb-8">
+          <button className="inline-flex items-center gap-2 text-sm font-medium text-gray-800 hover:text-black hover:bg-white/40 px-3 py-1.5 rounded-full transition-all duration-200">
+            <Bell className="w-4 h-4" />
+            <span>Subscribe</span>
           </button>
-          <button className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
-            📤
+          <button className="inline-flex items-center justify-center w-8 h-8 text-gray-800 hover:text-black hover:bg-white/40 rounded-full transition-all duration-200">
+            <Share className="w-4 h-4" />
           </button>
         </div>
 
         <Header />
         <OfferLinks />
         <HowToSection />
+        <GiftCardGrid />
         <TestimonialsCarousel />
 
         {/* Footer - cleaner styling */}
