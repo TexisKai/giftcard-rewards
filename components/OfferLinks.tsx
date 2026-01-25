@@ -5,116 +5,91 @@ import { trackOfferClick } from '@/lib/metaPixel';
 
 interface Offer {
     name: string;
-    logo: string;
     url: string;
-    requirements: string;
+    logo: string;
+    description: string;
+    subdescription: string;
 }
 
 const offers: Offer[] = [
     {
         name: 'Claim $750 Amazon gift card',
-        logo: '/images/amazon-logo.svg',
         url: 'https://unlockrwrd.com/ka68TBg',
-        requirements: '(Complete survey & 3 Deals)',
+        logo: 'https://cdn.beacons.ai/user_content/uRYCVPybe3dWNu289S1CGpgCnZQ2/referenced_images/2f184049-e1ef-4809-96f5-8ccc4373e1e9__link-in-bio__links-block__home__967a2477-7e35-47bf-9815-791528c41c00__4d508702-f9c1-4c5f-a1aa-0bf37b32d1ae__e62f40c5-73ea-4bee-9905-e8caf4d797c6.webp?t=1744088941782',
+        description: 'Claim $750 Amazon gift card',
+        subdescription: '(Complete survey & 3 Deals)',
     },
     {
         name: 'Claim $750 Shein gift card',
-        logo: '/images/shein-logo.svg',
         url: 'https://unlockrwrd.com/31kBHX0SP',
-        requirements: '(Complete survey & 3 Deals)',
+        logo: 'https://cdn.beacons.ai/user_content/uRYCVPybe3dWNu289S1CGpgCnZQ2/referenced_images/b28a6ad5-27e7-4033-8f01-339d0a9871ac__link-in-bio__links-block__home__967a2477-7e35-47bf-9815-791528c41c00__bfe915e1-f152-4699-9931-724146f13512__45e86a6c-62f8-4817-b29d-cd631f18917b.webp?t=1744088804464',
+        description: 'Claim $750 Shein gift card',
+        subdescription: '(Complete survey & 3 Deals)',
     },
     {
         name: 'Claim $750 Target gift card',
-        logo: '/images/target-logo.svg',
         url: 'https://unlockrwrd.com/V9MPuze',
-        requirements: '(Complete survey & 2 Deals)',
+        logo: 'https://cdn.beacons.ai/user_content/uRYCVPybe3dWNu289S1CGpgCnZQ2/referenced_images/0fd449dd-8ecf-410d-8c2e-cd9a8643b451__link-in-bio__links-block__home__967a2477-7e35-47bf-9815-791528c41c00__b96953e9-f84a-446a-8452-80ba57e5cd15__45613a9b-25a1-464c-bf88-58566de59c9a.webp?t=1744088999907',
+        description: 'Claim $750 Target gift card',
+        subdescription: '(Complete survey & 2 Deals)',
     },
 ];
 
 export default function OfferLinks() {
-    const handleOfferClick = async (offer: Offer) => {
-        // Track with Meta Pixel
-        trackOfferClick(offer.name);
-
-        // Track in database
-        const leadId = localStorage.getItem('lead_id');
-        try {
-            await fetch('/api/track-click', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    lead_id: leadId || null,
-                    offer_name: offer.name,
-                    offer_url: offer.url,
-                }),
-            });
-        } catch (error) {
-            console.error('Failed to track click:', error);
-        }
-
-        // Open offer URL
+    const handleOfferClick = (offer: Offer) => {
+        trackOfferClick(offer.name, offer.url);
         window.open(offer.url, '_blank');
     };
 
     return (
-        <div className="space-y-4 mb-8">
+        <div className="flex flex-col gap-4 mb-6">
             {offers.map((offer, index) => (
-                <button
+                <a
                     key={index}
-                    onClick={() => handleOfferClick(offer)}
-                    className="w-full bg-white/70 backdrop-blur-sm rounded-3xl p-3 md:p-4 flex items-center gap-4 
-                     hover:bg-white/90 hover:scale-[1.02] hover:shadow-xl
-                     active:scale-[0.98]
-                     transition-all duration-200 ease-out
-                     shadow-md min-h-[80px] group"
+                    href={offer.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        handleOfferClick(offer);
+                    }}
+                    className="flex items-center w-full p-2 transition-all duration-200 hover:opacity-80"
+                    style={{
+                        borderRadius: '36px',
+                        backgroundColor: 'rgb(255, 231, 238)',
+                        color: 'rgb(0, 0, 0)',
+                        fontFamily: 'Piazzolla, sans-serif',
+                        textTransform: 'none',
+                        boxShadow: 'none',
+                        fontSize: '15px',
+                        minHeight: '65px',
+                        margin: '0',
+                        border: '2px solid rgba(255, 255, 255, 0)',
+                        display: 'flex',
+                        pointerEvents: 'auto',
+                        textDecoration: 'none',
+                    }}
                 >
-                    {/* Circular logo container - 64px x 64px white frame with shadow */}
-                    <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center flex-shrink-0 shadow-md group-hover:shadow-lg transition-shadow">
-                        <div className="w-10 h-10 relative flex items-center justify-center">
-                            <Image
-                                src={offer.logo}
-                                alt={offer.name}
-                                width={40}
-                                height={40}
-                                className="object-contain"
-                                priority
-                            />
-                        </div>
+                    {/* Logo Container */}
+                    <div className="mr-2 flex items-center justify-center w-14 min-w-[56px]">
+                        <img
+                            width={45}
+                            height={45}
+                            alt={offer.name}
+                            src={offer.logo}
+                            style={{ objectFit: 'cover', borderRadius: '50%' }}
+                        />
                     </div>
 
-                    {/* Text content */}
-                    <div className="text-left flex-1">
-                        <p
-                            className="font-semibold text-[15px] md:text-base leading-tight text-gray-900 mb-1"
-                            style={{ fontFamily: 'var(--font-inter)' }}
-                        >
-                            {offer.name}
-                        </p>
-                        <p
-                            className="text-xs text-gray-500"
-                            style={{ fontFamily: 'var(--font-inter)' }}
-                        >
-                            {offer.requirements}
-                        </p>
+                    {/* Text Content */}
+                    <div className="w-full min-w-0 whitespace-pre-wrap text-center">
+                        <div className="text-base font-medium">{offer.description}</div>
+                        <div className="text-sm opacity-80">{offer.subdescription}</div>
                     </div>
 
-                    {/* Arrow indicator */}
-                    <div className="text-gray-400 group-hover:text-gray-600 transition-colors flex-shrink-0">
-                        <svg
-                            className="w-5 h-5 hidden sm:block"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M9 5l7 7-7 7"
-                            />
-                        </svg>
-                    </div>
-                </button>
+                    {/* Spacer for symmetry */}
+                    <div className="ml-2 w-14 min-w-[56px]"></div>
+                </a>
             ))}
         </div>
     );

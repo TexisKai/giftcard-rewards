@@ -1,28 +1,42 @@
+'use client';
+
+import Image from 'next/image';
+import { Bell, Share2 } from 'lucide-react';
+
 export default function Header() {
     return (
-        <header className="text-center mb-10">
-            {/* Dollar Icon - Black circle with $ symbol */}
-            <div className="flex justify-center mb-6">
-                <div className="w-24 h-24 rounded-full bg-white border-4 border-black flex items-center justify-center shadow-lg transform hover:scale-105 transition-transform duration-300">
-                    <span className="text-5xl font-bold font-sans tracking-tighter" style={{ fontFamily: 'var(--font-inter)' }}>$</span>
+        <div className="text-center">
+            {/* Profile Image - exactly 96x96 with 2px black border */}
+            <div className="flex justify-center mb-4">
+                <div
+                    className="w-24 h-24 rounded-full bg-white flex items-center justify-center overflow-hidden"
+                    style={{ border: '2px solid rgb(0, 0, 0)' }}
+                >
+                    {/* Dollar sign icon styled like the original */}
+                    <span
+                        className="text-5xl font-bold text-black"
+                        style={{ fontFamily: 'var(--font-arbutus)' }}
+                    >
+                        $
+                    </span>
                 </div>
             </div>
 
-            {/* Main Headline */}
+            {/* Title - Arbutus Slab, 48px equivalent */}
             <h1
-                className="text-4xl md:text-5xl lg:text-6xl font-bold mb-3 text-gray-900 tracking-tight"
-                style={{ fontFamily: 'var(--font-arbutus)' }}
+                className="text-4xl md:text-5xl font-bold text-black mb-2"
+                style={{ fontFamily: '"Arbutus Slab", sans-serif' }}
             >
                 Claim Your Reward
             </h1>
 
-            {/* Subheadline */}
+            {/* Subtitle - Piazzolla, 16px */}
             <p
-                className="text-base md:text-lg text-gray-800 max-w-sm mx-auto leading-relaxed"
-                style={{ fontFamily: 'var(--font-inter)' }}
+                className="text-base text-black mb-6 px-10"
+                style={{ fontFamily: 'Piazzolla, sans-serif' }}
             >
-                Fill Your Details, Install Apps & Get Giftcode Worth $750
+                Fill Your Details,Install Apps &amp; Get Giftcode Worth $750
             </p>
-        </header>
+        </div>
     );
 }

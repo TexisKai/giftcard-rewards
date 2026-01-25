@@ -1,97 +1,55 @@
 'use client';
 
-import { useState } from 'react';
-
-const TESTIMONIALS = [
-    {
-        name: 'Sarah M.',
-        active: 'Active now',
-        message: 'OMG I just received my Amazon gift card!! 🎉🎁 $750 is REAL!',
-        subMessage: 'About 3 days after completing the deals. Totally worth it! 💯',
-        color: 'bg-blue-500',
-        initial: 'S',
-    },
-    {
-        name: 'Jessica K.',
-        active: 'Active 2m ago',
-        message: "Just got my SHEIN gift card! Can't believe this actually works 😍",
-        subMessage: 'Shopping spree here I come! 🛍️',
-        color: 'bg-pink-500',
-        initial: 'J',
-    },
-    {
-        name: 'Mike R.',
-        active: 'Active 5m ago',
-        message: 'Target gift card came through! Thanks for the recommend! 🙏',
-        subMessage: "Just bought a new TV with it. Best thing I've done all year!",
-        color: 'bg-blue-600',
-        initial: 'M',
-    },
-    {
-        name: 'Emily T.',
-        active: 'Active now',
-        message: 'Update: Got ALL THREE cards! 🎊 Amazon + Shein + Target',
-        subMessage: "That's $2250 total!! 💰💰💰",
-        color: 'bg-purple-500',
-        initial: 'E',
-    },
-    {
-        name: 'David L.',
-        active: 'Active 1h ago',
-        message: 'Just want to say THANK YOU! 🙌 This changed my month honestly',
-        subMessage: 'Started with Amazon, doing Target next week! 🎧',
-        color: 'bg-blue-500',
-        initial: 'D',
-    },
+// Testimonial images from the original Beacons site
+const testimonialImages = [
+    'https://cdn.beacons.ai/user_content/uRYCVPybe3dWNu289S1CGpgCnZQ2/referenced_images/a6253208-d290-4a84-8b04-377ab8901c96__link-in-bio__image-block__home__62975818-7e85-415b-91e8-a0ad2f67ec33__455bb864-5fae-46a0-b730-43d9209a256f.jpg?t=1750349202477',
+    'https://cdn.beacons.ai/user_content/uRYCVPybe3dWNu289S1CGpgCnZQ2/referenced_images/7de1c444-2ac9-4265-beec-7de9dbe15017__link-in-bio__image-block__home__62975818-7e85-415b-91e8-a0ad2f67ec33__1ed744b9-27a4-49bb-b8eb-89c6e6f7869e.jpg?t=1750349191891',
+    'https://cdn.beacons.ai/user_content/uRYCVPybe3dWNu289S1CGpgCnZQ2/referenced_images/4730aad6-7077-4a57-999b-66c41b0af36e__link-in-bio__image-block__home__62975818-7e85-415b-91e8-a0ad2f67ec33__54c3b58d-4447-4003-bd93-2704cd01c468.jpg?t=1750349179905',
+    'https://cdn.beacons.ai/user_content/uRYCVPybe3dWNu289S1CGpgCnZQ2/referenced_images/8649227f-2364-492b-919d-ccea3671229e__link-in-bio__image-block__home__62975818-7e85-415b-91e8-a0ad2f67ec33__a854d20e-cd15-4b0f-9f15-339f2954dd12.jpg?t=1750349163951',
+    'https://cdn.beacons.ai/user_content/uRYCVPybe3dWNu289S1CGpgCnZQ2/referenced_images/f69fbdfd-3850-4836-8552-7961fa985e6d__link-in-bio__image-block__home__62975818-7e85-415b-91e8-a0ad2f67ec33__acb329cd-21d9-48f7-9431-c46fc7b7136e.jpg?t=1744090880743',
+    'https://cdn.beacons.ai/user_content/uRYCVPybe3dWNu289S1CGpgCnZQ2/referenced_images/65b45fc7-07ec-4e22-b19d-b4853639f941__link-in-bio__image-block__home__62975818-7e85-415b-91e8-a0ad2f67ec33__b6161475-821a-461e-bbaa-2a81ed54be7d.jpg?t=1744090851721',
+    'https://cdn.beacons.ai/user_content/uRYCVPybe3dWNu289S1CGpgCnZQ2/referenced_images/84f99ff6-e90d-4acb-92a9-4bd187cf5cbd__link-in-bio__image-block__home__62975818-7e85-415b-91e8-a0ad2f67ec33__19431c06-dc0f-4c1a-a990-3a48a02edb78.jpg?t=1744090804765',
+    'https://cdn.beacons.ai/user_content/uRYCVPybe3dWNu289S1CGpgCnZQ2/referenced_images/c0a9f99b-b33d-40d0-9320-992a06553670__link-in-bio__image-block__home__62975818-7e85-415b-91e8-a0ad2f67ec33__2faf071f-0cd0-41cd-888b-d428800af973.jpg?t=1744090507842',
 ];
 
 export default function TestimonialsCarousel() {
     return (
-        <div className="mb-12">
-            <h3
-                className="text-center text-xl font-bold mb-6 text-gray-900"
-                style={{ fontFamily: 'var(--font-arbutus)' }}
+        <div className="mb-8">
+            {/* Header */}
+            <div
+                className="text-center mb-4"
+                style={{
+                    borderRadius: '36px',
+                    color: 'rgb(0, 0, 0)',
+                    fontFamily: 'Piazzolla, sans-serif',
+                    fontWeight: 400,
+                }}
             >
-                Top winners of the offers
-            </h3>
-
-            {/* Snap Scroll Container */}
-            <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-8 -mx-4 px-4 md:mx-0 md:px-0 scrollbar-hide">
-                {TESTIMONIALS.map((t, index) => (
-                    <div
-                        key={index}
-                        className="snap-center shrink-0 w-[85vw] md:w-[350px] bg-white rounded-3xl p-6 shadow-lg border-2 border-black flex flex-col"
-                    >
-                        {/* Header */}
-                        <div className="flex items-center gap-3 mb-4">
-                            <div className={`w-12 h-12 rounded-full ${t.color} flex items-center justify-center text-white font-bold text-lg border-2 border-black`}>
-                                {t.initial}
-                            </div>
-                            <div>
-                                <p className="font-bold text-gray-900">{t.name}</p>
-                                <p className="text-xs text-gray-500">{t.active}</p>
-                            </div>
-                            <div className="ml-auto bg-green-100 text-green-700 text-xs px-2 py-1 rounded-full font-bold">
-                                VERIFIED
-                            </div>
-                        </div>
-
-                        {/* Message Bubbles */}
-                        <div className="space-y-3">
-                            <div className="bg-blue-500 text-white p-4 rounded-2xl rounded-tl-none text-sm md:text-base leading-relaxed shadow-sm">
-                                {t.message}
-                            </div>
-                            {t.subMessage && (
-                                <div className="bg-blue-500 text-white p-4 rounded-2xl rounded-tl-none text-sm md:text-base leading-relaxed shadow-sm">
-                                    {t.subMessage}
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                ))}
+                <div className="text-lg font-semibold">Top winners of the offers</div>
+                <div className="mt-2">Swipe⬅️</div>
             </div>
 
-            <p className="text-center text-sm text-gray-500 mt-2">Swipe to see more ⬅️➡️</p>
+            {/* Horizontal Scroll Container - exactly like Beacons */}
+            <div className="flex items-center gap-4 overflow-x-auto pb-2">
+                {testimonialImages.map((src, index) => (
+                    <a
+                        key={index}
+                        tabIndex={0}
+                        role="button"
+                        aria-label="link"
+                        className="flex justify-center flex-shrink-0"
+                        style={{ color: 'inherit', minWidth: '90%', width: '90%' }}
+                    >
+                        <img
+                            aria-label="block image"
+                            src={src}
+                            alt={`Winner testimonial ${index + 1}`}
+                            className="w-full object-cover"
+                            style={{ borderRadius: '25px' }}
+                        />
+                    </a>
+                ))}
+            </div>
         </div>
     );
 }
