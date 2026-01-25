@@ -13,10 +13,8 @@ export default function EmailPopup({ onEmailSubmit }: EmailPopupProps) {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        // Check if user has already submitted email
         const hasSubmitted = localStorage.getItem('emailSubmitted');
         if (!hasSubmitted) {
-            // Show popup after 1 second
             const timer = setTimeout(() => {
                 setIsOpen(true);
             }, 1000);
@@ -53,83 +51,123 @@ export default function EmailPopup({ onEmailSubmit }: EmailPopupProps) {
         }
     };
 
-    if (!isOpen) return null;
+    if (!isOpen) return <Toaster position="top-center" />;
 
     return (
         <>
             <Toaster position="top-center" />
 
-            {/* Overlay */}
+            {/* Full screen overlay with solid dark background */}
             <div
-                className="fixed inset-0 z-50 flex items-center justify-center p-4"
-                style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
+                style={{
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+                    zIndex: 9999,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '16px',
+                }}
             >
-                {/* Modal - styled like Beacons popup */}
+                {/* White Modal Card - SOLID white background, mobile optimized */}
                 <div
-                    className="relative w-full max-w-md bg-white p-6"
                     style={{
+                        width: '100%',
+                        maxWidth: '380px',
+                        backgroundColor: '#FFFFFF',
                         borderRadius: '24px',
-                        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+                        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.4)',
+                        padding: '28px 24px',
+                        margin: '0 auto',
                     }}
                 >
-                    {/* Close button */}
-                    <button
-                        onClick={() => setIsOpen(false)}
-                        className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
-                        aria-label="close pop-up"
-                    >
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-
-                    {/* Label */}
+                    {/* Pre-heading - small uppercase */}
                     <p
-                        className="text-xs text-gray-500 mb-1 font-semibold uppercase tracking-wide"
-                        style={{ fontFamily: 'Piazzolla, sans-serif' }}
+                        style={{
+                            fontFamily: 'Piazzolla, sans-serif',
+                            fontWeight: 600,
+                            fontSize: '11px',
+                            color: '#6B7280',
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.5px',
+                            marginBottom: '8px',
+                        }}
                     >
-                        Important — Do Not Skip
+                        IMPORTANT DO NOT SKIP
                     </p>
 
-                    {/* Heading */}
+                    {/* Main Heading - VERY bold like original */}
                     <h2
-                        className="text-2xl font-bold mb-3 text-black"
-                        style={{ fontFamily: '"Arbutus Slab", sans-serif' }}
+                        style={{
+                            fontFamily: 'Georgia, "Times New Roman", serif',
+                            fontSize: '32px',
+                            fontWeight: 900,
+                            color: '#000000',
+                            marginBottom: '16px',
+                            lineHeight: 1.2,
+                        }}
                     >
                         Before YOU Continue
                     </h2>
 
-                    {/* Description */}
+                    {/* Subtitle/Description */}
                     <p
-                        className="text-sm mb-5 text-gray-600 leading-relaxed"
-                        style={{ fontFamily: 'Piazzolla, sans-serif' }}
+                        style={{
+                            fontFamily: 'Piazzolla, sans-serif',
+                            fontSize: '15px',
+                            color: '#4B5563',
+                            marginBottom: '24px',
+                            lineHeight: 1.6,
+                        }}
                     >
-                        Enter your email so rewards can be sent if you become eligible.
-                        Gift cards are unlocked only after completing the required deals and surveys.
+                        Enter your email so rewards can be sent if you become eligible. Gift cards are unlocked only after completing the required deals and surveys.
                     </p>
 
                     {/* Form */}
                     <form onSubmit={handleSubmit}>
+                        {/* Email Input */}
                         <input
                             type="email"
                             placeholder="Email address"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl mb-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-transparent transition-all"
                             required
                             disabled={isLoading}
-                            style={{ fontFamily: 'Piazzolla, sans-serif' }}
+                            style={{
+                                width: '100%',
+                                padding: '14px 16px',
+                                border: '1px solid #D1D5DB',
+                                borderRadius: '12px',
+                                fontSize: '16px',
+                                fontFamily: 'Piazzolla, sans-serif',
+                                marginBottom: '16px',
+                                outline: 'none',
+                                boxSizing: 'border-box',
+                                backgroundColor: '#FFFFFF',
+                            }}
                         />
+
+                        {/* Submit Button - pink rounded, full width */}
                         <button
                             type="submit"
                             disabled={isLoading}
-                            className="w-full py-3.5 font-semibold transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                             style={{
-                                backgroundColor: 'rgb(255, 182, 193)', // Light pink
-                                color: 'rgb(0, 0, 0)',
+                                width: '100%',
+                                backgroundColor: '#F472B6',
+                                color: '#FFFFFF',
                                 borderRadius: '36px',
                                 fontFamily: 'Piazzolla, sans-serif',
-                                minHeight: '48px',
+                                padding: '14px 24px',
+                                fontSize: '16px',
+                                fontWeight: 600,
+                                border: 'none',
+                                cursor: isLoading ? 'not-allowed' : 'pointer',
+                                opacity: isLoading ? 0.5 : 1,
+                                transition: 'opacity 0.2s',
                             }}
                         >
                             {isLoading ? 'Saving...' : 'Continue to offers'}

@@ -1,9 +1,6 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
-import { Inter } from 'next/font/google';
 import './globals.css';
-
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 export const metadata: Metadata = {
   title: 'Claim Your $750 Reward - Free Gift Cards',
@@ -35,6 +32,21 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Preload fonts for faster rendering */}
+        <link
+          rel="preconnect"
+          href="https://fonts.googleapis.com"
+        />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Arbutus+Slab:wght@400;700&family=Piazzolla:wght@400;600;700&display=swap"
+          rel="stylesheet"
+        />
+
         {/* Meta Pixel Code */}
         {pixelId && (
           <>
@@ -64,7 +76,9 @@ export default function RootLayout({
           </>
         )}
       </head>
-      <body className={inter.className}>{children}</body>
+      <body style={{ margin: 0, padding: 0, fontFamily: 'Piazzolla, Georgia, serif' }}>
+        {children}
+      </body>
     </html>
   );
 }
