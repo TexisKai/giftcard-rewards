@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { trackOfferClick } from '@/lib/metaPixel';
 
 interface Offer {
@@ -37,59 +36,61 @@ const offers: Offer[] = [
 
 export default function OfferLinks() {
     const handleOfferClick = (offer: Offer) => {
-        trackOfferClick(offer.name, offer.url);
+        trackOfferClick(offer.name);
         window.open(offer.url, '_blank');
     };
 
     return (
-        <div className="flex flex-col gap-4 mb-6">
+        <div className="Links classic" style={{ gridTemplateColumns: 'repeat(1, minmax(0px, 1fr))', gap: '16px' }}>
             {offers.map((offer, index) => (
-                <a
-                    key={index}
-                    href={offer.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => {
-                        e.preventDefault();
-                        handleOfferClick(offer);
-                    }}
-                    className="flex items-center w-full p-2 transition-all duration-200 hover:opacity-80"
-                    style={{
-                        borderRadius: '36px',
-                        backgroundColor: 'rgb(255, 231, 238)',
-                        color: 'rgb(0, 0, 0)',
-                        fontFamily: 'Piazzolla, sans-serif',
-                        textTransform: 'none',
-                        boxShadow: 'none',
-                        fontSize: '15px',
-                        minHeight: '65px',
-                        margin: '0',
-                        border: '2px solid rgba(255, 255, 255, 0)',
-                        display: 'flex',
-                        pointerEvents: 'auto',
-                        textDecoration: 'none',
-                    }}
-                >
-                    {/* Logo Container */}
-                    <div className="mr-2 flex items-center justify-center w-14 min-w-[56px]">
-                        <img
-                            width={45}
-                            height={45}
-                            alt={offer.name}
-                            src={offer.logo}
-                            style={{ objectFit: 'cover', borderRadius: '50%' }}
-                        />
-                    </div>
+                <center key={index} className="RowLink relative">
+                    <a
+                        href={offer.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            handleOfferClick(offer);
+                        }}
+                        className="flex w-full transition-all duration-200 hover:opacity-80"
+                        style={{
+                            borderRadius: '36px',
+                            backgroundColor: 'rgb(255, 231, 238)',
+                            color: 'rgb(0, 0, 0)',
+                            fontFamily: 'Piazzolla, sans-serif',
+                            textTransform: 'none',
+                            boxShadow: 'none',
+                            fontSize: '15px',
+                            minHeight: '65px',
+                            padding: '8px',
+                            margin: '16px 0px',
+                            border: '2px solid rgba(255, 255, 255, 0)',
+                            display: 'flex',
+                            pointerEvents: 'auto',
+                            textDecoration: 'none',
+                        }}
+                    >
+                        {/* Logo Container - exactly 56px */}
+                        <div className="mr-2 flex items-center justify-center" style={{ width: '56px', minWidth: '56px' }}>
+                            <img
+                                width={45}
+                                height={45}
+                                alt={offer.name}
+                                src={offer.logo}
+                                style={{ objectFit: 'cover', borderRadius: '50%' }}
+                            />
+                        </div>
 
-                    {/* Text Content */}
-                    <div className="w-full min-w-0 whitespace-pre-wrap text-center">
-                        <div className="text-base font-medium">{offer.description}</div>
-                        <div className="text-sm opacity-80">{offer.subdescription}</div>
-                    </div>
+                        {/* Text Content - centered */}
+                        <div className="w-full min-w-0 whitespace-pre-wrap text-center">
+                            <div className="text-base">{offer.description}</div>
+                            <div className="text-sm opacity-80">{offer.subdescription}</div>
+                        </div>
 
-                    {/* Spacer for symmetry */}
-                    <div className="ml-2 w-14 min-w-[56px]"></div>
-                </a>
+                        {/* Spacer for symmetry */}
+                        <div className="ml-2" style={{ width: '56px', minWidth: '56px' }}></div>
+                    </a>
+                </center>
             ))}
         </div>
     );

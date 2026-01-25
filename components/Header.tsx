@@ -1,21 +1,27 @@
 'use client';
 
-import Image from 'next/image';
-import { Bell, Share2 } from 'lucide-react';
-
 export default function Header() {
     return (
         <div className="text-center">
-            {/* Profile Image - exactly 96x96 with 2px black border */}
+            {/* Profile Image - exactly 96x96 with 2px black border like original */}
             <div className="flex justify-center mb-4">
                 <div
-                    className="w-24 h-24 rounded-full bg-white flex items-center justify-center overflow-hidden"
-                    style={{ border: '2px solid rgb(0, 0, 0)' }}
+                    className="w-24 h-24 rounded-full bg-white flex items-center justify-center"
+                    style={{
+                        border: '2px solid rgb(0, 0, 0)',
+                        width: '96px',
+                        height: '96px',
+                        borderRadius: '10000px',
+                    }}
                 >
-                    {/* Dollar sign icon styled like the original */}
+                    {/* Large Dollar sign - matching original */}
                     <span
-                        className="text-5xl font-bold text-black"
-                        style={{ fontFamily: 'var(--font-arbutus)' }}
+                        className="font-bold text-black"
+                        style={{
+                            fontFamily: '"Arbutus Slab", sans-serif',
+                            fontSize: '48px',
+                            lineHeight: 1,
+                        }}
                     >
                         $
                     </span>
@@ -23,20 +29,51 @@ export default function Header() {
             </div>
 
             {/* Title - Arbutus Slab, 48px equivalent */}
-            <h1
-                className="text-4xl md:text-5xl font-bold text-black mb-2"
-                style={{ fontFamily: '"Arbutus Slab", sans-serif' }}
+            <div
+                className="w-full"
+                style={{ marginTop: '16px' }}
             >
-                Claim Your Reward
-            </h1>
+                <div
+                    className="box-border w-full"
+                    style={{
+                        fontSize: '48px',
+                        color: 'rgb(0, 0, 0)',
+                        paddingLeft: '20px',
+                        paddingRight: '20px',
+                        fontFamily: '"Arbutus Slab", sans-serif',
+                        borderRadius: '36px',
+                    }}
+                >
+                    <div
+                        className="w-full"
+                        style={{
+                            fontWeight: 700,
+                            fontFamily: '"Arbutus Slab", sans-serif',
+                            textAlign: 'center',
+                        }}
+                    >
+                        Claim Your Reward
+                    </div>
+                </div>
+            </div>
 
             {/* Subtitle - Piazzolla, 16px */}
-            <p
-                className="text-base text-black mb-6 px-10"
-                style={{ fontFamily: 'Piazzolla, sans-serif' }}
-            >
-                Fill Your Details,Install Apps &amp; Get Giftcode Worth $750
-            </p>
+            <div style={{ marginTop: '8px' }}>
+                <div
+                    style={{
+                        borderRadius: '36px',
+                        color: 'rgb(0, 0, 0)',
+                        fontFamily: 'Piazzolla, sans-serif',
+                        fontWeight: 400,
+                        fontSize: '16px',
+                        marginBottom: '8px',
+                        paddingLeft: '40px',
+                        paddingRight: '40px',
+                    }}
+                >
+                    Fill Your Details,Install Apps &amp; Get Giftcode Worth $750
+                </div>
+            </div>
         </div>
     );
 }
