@@ -14,38 +14,62 @@ const testimonialImages = [
 
 export default function TestimonialsCarousel() {
     return (
-        <div className="mb-8">
-            {/* Header */}
+        <div style={{ marginBottom: '32px' }}>
+            {/* Header - exactly like original */}
             <div
-                className="text-center mb-4"
                 style={{
-                    borderRadius: '36px',
+                    textAlign: 'center',
+                    marginBottom: '16px',
                     color: 'rgb(0, 0, 0)',
                     fontFamily: 'Piazzolla, sans-serif',
-                    fontWeight: 400,
                 }}
             >
-                <div className="text-lg font-semibold">Top winners of the offers</div>
-                <div className="mt-2">Swipe⬅️</div>
+                {/* Title - bold like original */}
+                <div style={{ fontWeight: 700, fontSize: '18px', marginBottom: '4px' }}>
+                    Top winners of the offers
+                </div>
+                {/* Swipe text with left arrow emoji like original */}
+                <div style={{ fontWeight: 400, fontSize: '14px' }}>
+                    Swipe⬅️
+                </div>
             </div>
 
             {/* Horizontal Scroll Container - exactly like Beacons */}
-            <div className="flex items-center gap-4 overflow-x-auto pb-2">
+            <div
+                style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '16px',
+                    overflowX: 'auto',
+                    paddingBottom: '8px',
+                }}
+                className="scrollbar-hide"
+            >
                 {testimonialImages.map((src, index) => (
                     <a
                         key={index}
                         tabIndex={0}
                         role="button"
                         aria-label="link"
-                        className="flex justify-center flex-shrink-0"
-                        style={{ color: 'inherit', minWidth: '90%', width: '90%' }}
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            flexShrink: 0,
+                            color: 'inherit',
+                            minWidth: '90%',
+                            width: '90%',
+                        }}
                     >
                         <img
                             aria-label="block image"
                             src={src}
                             alt={`Winner testimonial ${index + 1}`}
-                            className="w-full object-cover"
-                            style={{ borderRadius: '25px' }}
+                            loading="lazy"
+                            style={{
+                                width: '100%',
+                                objectFit: 'cover',
+                                borderRadius: '25px',
+                            }}
                         />
                     </a>
                 ))}

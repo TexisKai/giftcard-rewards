@@ -76,6 +76,7 @@ export default function EmailPopup({ onEmailSubmit }: EmailPopupProps) {
                 {/* White Modal Card - SOLID white background, mobile optimized */}
                 <div
                     style={{
+                        position: 'relative',
                         width: '100%',
                         maxWidth: '380px',
                         backgroundColor: '#FFFFFF',
@@ -85,13 +86,36 @@ export default function EmailPopup({ onEmailSubmit }: EmailPopupProps) {
                         margin: '0 auto',
                     }}
                 >
-                    {/* Pre-heading - small uppercase */}
+                    {/* Small close button - top right */}
+                    <button
+                        onClick={() => setIsOpen(false)}
+                        style={{
+                            position: 'absolute',
+                            top: '12px',
+                            right: '12px',
+                            width: '24px',
+                            height: '24px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            background: 'transparent',
+                            border: 'none',
+                            cursor: 'pointer',
+                            color: '#9CA3AF',
+                            fontSize: '18px',
+                            padding: 0,
+                        }}
+                        aria-label="Close popup"
+                    >
+                        ×
+                    </button>
+                    {/* Pre-heading - small uppercase BOLD */}
                     <p
                         style={{
                             fontFamily: 'Piazzolla, sans-serif',
-                            fontWeight: 600,
+                            fontWeight: 700,
                             fontSize: '11px',
-                            color: '#6B7280',
+                            color: '#1F2937',
                             textTransform: 'uppercase',
                             letterSpacing: '0.5px',
                             marginBottom: '8px',

@@ -41,57 +41,79 @@ export default function OfferLinks() {
     };
 
     return (
-        <div className="Links classic" style={{ gridTemplateColumns: 'repeat(1, minmax(0px, 1fr))', gap: '16px' }}>
-            {offers.map((offer, index) => (
-                <center key={index} className="RowLink relative">
-                    <a
-                        href={offer.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            handleOfferClick(offer);
-                        }}
-                        className="flex w-full transition-all duration-200 hover:opacity-80"
-                        style={{
-                            borderRadius: '36px',
-                            backgroundColor: 'rgb(255, 231, 238)',
-                            color: 'rgb(0, 0, 0)',
-                            fontFamily: 'Piazzolla, sans-serif',
-                            textTransform: 'none',
-                            boxShadow: 'none',
-                            fontSize: '15px',
-                            minHeight: '65px',
-                            padding: '8px',
-                            margin: '16px 0px',
-                            border: '2px solid rgba(255, 255, 255, 0)',
-                            display: 'flex',
-                            pointerEvents: 'auto',
-                            textDecoration: 'none',
-                        }}
-                    >
-                        {/* Logo Container - exactly 56px */}
-                        <div className="mr-2 flex items-center justify-center" style={{ width: '56px', minWidth: '56px' }}>
-                            <img
-                                width={45}
-                                height={45}
-                                alt={offer.name}
-                                src={offer.logo}
-                                style={{ objectFit: 'cover', borderRadius: '50%' }}
-                            />
-                        </div>
+        <>
+            {/* CSS for wobble animation with 3.4s rest */}
+            <style jsx>{`
+        @keyframes wobble {
+          0% { transform: rotate(0deg); }
+          4% { transform: rotate(-3deg); }
+          8% { transform: rotate(3deg); }
+          12% { transform: rotate(-3deg); }
+          16% { transform: rotate(3deg); }
+          20% { transform: rotate(-1deg); }
+          24% { transform: rotate(1deg); }
+          28% { transform: rotate(0deg); }
+          100% { transform: rotate(0deg); }
+        }
+        .wobble-animation {
+          animation: wobble 5s ease-in-out infinite;
+        }
+      `}</style>
 
-                        {/* Text Content - centered */}
-                        <div className="w-full min-w-0 whitespace-pre-wrap text-center">
-                            <div className="text-base">{offer.description}</div>
-                            <div className="text-sm opacity-80">{offer.subdescription}</div>
-                        </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '24px' }}>
+                {offers.map((offer, index) => (
+                    <div key={index} style={{ textAlign: 'center' }}>
+                        <a
+                            href={offer.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                handleOfferClick(offer);
+                            }}
+                            className={index === 0 ? 'wobble-animation' : ''}
+                            style={{
+                                display: 'flex',
+                                width: '100%',
+                                borderRadius: '36px',
+                                backgroundColor: 'rgb(255, 231, 238)',
+                                color: 'rgb(0, 0, 0)',
+                                fontFamily: 'Piazzolla, sans-serif',
+                                textTransform: 'none',
+                                boxShadow: 'none',
+                                fontSize: '15px',
+                                minHeight: '65px',
+                                padding: '8px',
+                                border: '2px solid rgba(255, 255, 255, 0)',
+                                pointerEvents: 'auto',
+                                textDecoration: 'none',
+                                transition: 'opacity 0.2s',
+                            }}
+                        >
+                            {/* Logo Container */}
+                            <div style={{ marginRight: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '56px', minWidth: '56px' }}>
+                                <img
+                                    width={45}
+                                    height={45}
+                                    alt={offer.name}
+                                    src={offer.logo}
+                                    loading="lazy"
+                                    style={{ objectFit: 'cover', borderRadius: '50%' }}
+                                />
+                            </div>
 
-                        {/* Spacer for symmetry */}
-                        <div className="ml-2" style={{ width: '56px', minWidth: '56px' }}></div>
-                    </a>
-                </center>
-            ))}
-        </div>
+                            {/* Text Content */}
+                            <div style={{ width: '100%', minWidth: 0, whiteSpace: 'pre-wrap', textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                                <div style={{ fontSize: '16px' }}>{offer.description}</div>
+                                <div style={{ fontSize: '14px', opacity: 0.8 }}>{offer.subdescription}</div>
+                            </div>
+
+                            {/* Spacer for symmetry */}
+                            <div style={{ marginLeft: '8px', width: '56px', minWidth: '56px' }}></div>
+                        </a>
+                    </div>
+                ))}
+            </div>
+        </>
     );
 }
