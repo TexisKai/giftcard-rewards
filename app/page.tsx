@@ -16,16 +16,19 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-[#FFE1E8] to-[#FFC9D9] pb-20">
+    <main className="min-h-screen bg-gradient-to-b from-[#FFE1E8] to-[#FFC9D9] pb-16">
       <EmailPopup onEmailSubmit={handleEmailSubmit} />
 
-      <div className="max-w-2xl mx-auto px-4 py-6">
-        {/* Top Navigation */}
-        <div className="flex justify-between items-center mb-6">
-          <button className="text-sm flex items-center gap-1 hover:opacity-70 transition-opacity bg-white/50 px-3 py-1.5 rounded-full border border-black/10">
-            <span>🔔</span> Subscribe
+      <div className="max-w-lg mx-auto px-4 py-5">
+        {/* Top Navigation - lightweight link-style buttons */}
+        <div className="flex justify-between items-center mb-5">
+          <button className="inline-flex items-center gap-1 text-sm text-gray-600 hover:text-gray-900 transition-colors">
+            <span>🔔</span>
+            <span className="underline-offset-2 hover:underline">
+              Subscribe
+            </span>
           </button>
-          <button className="text-sm hover:opacity-70 transition-opacity bg-white/50 w-8 h-8 flex items-center justify-center rounded-full border border-black/10">
+          <button className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
             📤
           </button>
         </div>
@@ -35,18 +38,16 @@ export default function Home() {
         <HowToSection />
         <TestimonialsCarousel />
 
-        {/* Footer */}
-        <div className="text-center mt-12">
+        {/* Footer - cleaner styling */}
+        <div className="text-center mt-10">
           <a
             href="https://beacons.ai/signup"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-gray-800 transition-colors"
+            className="inline-flex items-center gap-2 text-xs text-gray-500 hover:text-gray-700 transition-colors"
           >
+            <span>Powered by</span>
             <span className="font-semibold">Beacons</span>
-            <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-medium">
-              Try for free!
-            </span>
           </a>
         </div>
       </div>
