@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createServerSupabaseClient } from '@/lib/supabase';
+import { sendMetaEvent } from '@/lib/metaConversionsAPI';
+import { v4 as uuidv4 } from 'uuid';
 import type { CollectEmailRequest, CollectEmailResponse } from '@/lib/types';
 
 export async function POST(request: NextRequest) {
@@ -17,10 +19,19 @@ export async function POST(request: NextRequest) {
         }
 
         // Extract user agent and IP
-        const userAgent = request.headers.get('user-agent') || undefined;
+        const userAgent = request.headers.get('user-agent') || 'unknown';
         const forwardedFor = request.headers.get('x-forwarded-for');
         const realIp = request.headers.get('x-real-ip');
-        const ipAddress = forwardedFor?.split(',')[0] || realIp || undefined;
+        const ipAddress = forwardedFor?.split(',')[0]?.trim() || realIp || '127.0.0.1';
+        const eventSourceUrl = request.headers.get('referer') || process.env.NEXT_PUBLIC_SITE_URL || 'https://your-site.vercel.app';
+
+        // Extract cookies for Meta deduplication
+        const cookies = request.headers.get('cookie') || '';
+        const fbp = cookies.match(/_fbp=([^;]+)/)?.[1] || null;
+        const fbc = cookies.match(/_fbc=([^;]+)/)?.[1] || null;
+
+        // Generate unique event ID for deduplication
+        const eventId = uuidv4();
 
         const supabase = createServerSupabaseClient();
 
@@ -29,9 +40,23 @@ export async function POST(request: NextRequest) {
             // Return success with a mock lead_id when database is not configured
             // This allows the frontend to work during development
             console.warn('Supabase not configured, returning mock response');
+
+            // Still send Meta CAPI event even without database
+            await sendMetaEvent({
+                eventName: 'Lead',
+                email: email,
+                eventSourceUrl: eventSourceUrl,
+                clientIpAddress: ipAddress,
+                clientUserAgent: userAgent,
+                fbp: fbp,
+                fbc: fbc,
+                eventId: eventId,
+            });
+
             return NextResponse.json<CollectEmailResponse>({
                 success: true,
                 lead_id: crypto.randomUUID(),
+                eventId: eventId,
             });
         }
 
@@ -73,9 +98,22 @@ export async function POST(request: NextRequest) {
             );
         }
 
+        // Send to Meta Conversions API
+        await sendMetaEvent({
+            eventName: 'Lead',
+            email: email,
+            eventSourceUrl: eventSourceUrl,
+            clientIpAddress: ipAddress,
+            clientUserAgent: userAgent,
+            fbp: fbp,
+            fbc: fbc,
+            eventId: eventId,
+        });
+
         return NextResponse.json<CollectEmailResponse>({
             success: true,
             lead_id: newLead.id,
+            eventId: eventId,
         });
     } catch (error) {
         console.error('API error:', error);

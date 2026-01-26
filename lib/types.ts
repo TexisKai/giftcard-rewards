@@ -39,6 +39,7 @@ export interface CollectEmailResponse {
   success: boolean;
   lead_id?: string;
   existing?: boolean;
+  eventId?: string;
   error?: string;
 }
 

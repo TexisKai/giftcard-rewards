@@ -37,8 +37,15 @@ export default function EmailPopup({ onEmailSubmit }: EmailPopupProps) {
             const data = await response.json();
 
             if (response.ok) {
+                // Fire pixel with same event_id for deduplication
+                if (typeof window !== 'undefined' && (window as unknown as { fbq?: (...args: unknown[]) => void }).fbq && data.eventId) {
+                    (window as unknown as { fbq: (...args: unknown[]) => void }).fbq('track', 'Lead', {}, {
+                        eventID: data.eventId // CRITICAL: Same ID as CAPI
+                    });
+                }
+
                 localStorage.setItem('emailSubmitted', 'true');
-                onEmailSubmit(email, data.id);
+                onEmailSubmit(email, data.lead_id || data.id);
                 setIsOpen(false);
                 toast.success('Email saved! Continue to claims.');
             } else {
