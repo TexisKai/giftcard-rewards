@@ -13,21 +13,21 @@ interface Offer {
 const offers: Offer[] = [
     {
         name: 'Claim $750 Amazon gift card',
-        url: 'https://unlockrwrd.com/ka68TBg',
+        url: 'https://texiskai.github.io',
         logo: 'https://cdn.beacons.ai/user_content/uRYCVPybe3dWNu289S1CGpgCnZQ2/referenced_images/2f184049-e1ef-4809-96f5-8ccc4373e1e9__link-in-bio__links-block__home__967a2477-7e35-47bf-9815-791528c41c00__4d508702-f9c1-4c5f-a1aa-0bf37b32d1ae__e62f40c5-73ea-4bee-9905-e8caf4d797c6.webp?t=1744088941782',
         description: 'Claim $750 Amazon gift card',
         subdescription: '(Complete survey & 3 Deals)',
     },
     {
         name: 'Claim $750 Shein gift card',
-        url: 'https://unlockrwrd.com/31kBHX0SP',
+        url: 'https://texiskai.github.io',
         logo: 'https://cdn.beacons.ai/user_content/uRYCVPybe3dWNu289S1CGpgCnZQ2/referenced_images/b28a6ad5-27e7-4033-8f01-339d0a9871ac__link-in-bio__links-block__home__967a2477-7e35-47bf-9815-791528c41c00__bfe915e1-f152-4699-9931-724146f13512__45e86a6c-62f8-4817-b29d-cd631f18917b.webp?t=1744088804464',
         description: 'Claim $750 Shein gift card',
         subdescription: '(Complete survey & 3 Deals)',
     },
     {
         name: 'Claim $750 Target gift card',
-        url: 'https://unlockrwrd.com/V9MPuze',
+        url: 'https://texiskai.github.io/target',
         logo: 'https://cdn.beacons.ai/user_content/uRYCVPybe3dWNu289S1CGpgCnZQ2/referenced_images/0fd449dd-8ecf-410d-8c2e-cd9a8643b451__link-in-bio__links-block__home__967a2477-7e35-47bf-9815-791528c41c00__b96953e9-f84a-446a-8452-80ba57e5cd15__45613a9b-25a1-464c-bf88-58566de59c9a.webp?t=1744088999907',
         description: 'Claim $750 Target gift card',
         subdescription: '(Complete survey & 2 Deals)',
