@@ -47,6 +47,20 @@ export default function RootLayout({
           rel="stylesheet"
         />
 
+        {/* Google Analytics (gtag.js) */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-Y3YGFDLTDC"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-Y3YGFDLTDC');
+          `}
+        </Script>
+
         {/* Meta Pixel Code */}
         {pixelId && (
           <>
